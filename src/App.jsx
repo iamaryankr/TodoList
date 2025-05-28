@@ -6,37 +6,46 @@ import TodoItem from "./components/TodoItem";
 
 
 function App() {
+  //adding the state for todos
   const [todos, setTodos] = useState([]);
 
+  //function to add a new todo
   const addTodo = (todo) => {
+    //(prev) => [..] is arrow function that passes the previous state
+    //...prev spreads all the old todos in a new array
+    //{id: Date.now(), ...todo } creates a new todo object with a unique id where ...todo spreads all the properties
     setTodos((prev) => [...prev, { id: Date.now(), ...todo }]);
   };
 
+  //function to update an existing todo
   const updateTodo = (id, todo) => {
+    //use prev.map to iterate
     setTodos((prev) =>
-      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
+      prev.map((curr) => (curr.id === id ? todo : curr))
     );
   };
 
+  //function to delete a todo
   const deleteTodo = (id) => {
+    //use prev.filter
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
+  //function to toggle the completion status of a todo
   const toggleComplete = (id) => {
     setTodos((prev) =>
-      prev.map((prevTodo) =>
-        prevTodo.id === id
-          ? { ...prevTodo, completed: !prevTodo.completed }
-          : prevTodo
+      prev.map((curr) => curr.id === id ? { ...curr, completed: !curr.completed } : curr
       )
     );
   };
 
+  //useEffect to load todos from localStorage when the component mounts
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("todos"));
     if (todos && todos.length > 0) setTodos(todos);
   }, []);
 
+  //useEffect to Save todos when changed
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);

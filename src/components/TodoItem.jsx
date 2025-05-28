@@ -9,13 +9,13 @@ function TodoItem({ todo }) {
     const { updateTodo, deleteTodo, toggleComplete } = useTodo();
 
     const editTodo = () => {
-        updateTodo(todo.id, {...todo, todo: todoMsg})
-        setIsTodoEditable(false)
+        updateTodo(todo.id, {...todo, todo: todoMsg});
+        setIsTodoEditable(false);
     };
 
     const toggleCompleted = () => {
         //console.log(todo.id);
-        toggleComplete(todo.id)
+        toggleComplete(todo.id);
     };
 
     return (
