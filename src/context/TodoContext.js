@@ -1,5 +1,11 @@
 import {createContext, useContext} from "react"
 
+
+//we are creating a context for todos
+//and gives it a default value
+//like a "conract" of what's expected inside
+
+
 export const TodoContext = createContext({
     todos: [
         {
@@ -15,8 +21,5 @@ export const TodoContext = createContext({
 });
 
 
-export const useTodo = () => {
-    return useContext(TodoContext)
-};
-
+export const useTodo = () => { return useContext(TodoContext) };
 export const TodoProvider = TodoContext.Provider ;
